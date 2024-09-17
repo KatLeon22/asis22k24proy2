@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+ 
 
 namespace CapaDiseno
 {
@@ -216,6 +217,7 @@ namespace CapaDiseno
                         if (resultado)
                         {
                             MessageBox.Show("Asignación creada exitosamente.");
+                            
                         }
                         else
                         {
@@ -236,6 +238,7 @@ namespace CapaDiseno
             {
                 MessageBox.Show($"Error al crear la asignación: {ex.Message}");
             }
+
 
         }
 
@@ -276,6 +279,11 @@ namespace CapaDiseno
                 // txt_aplicacion.Text = selectedItem.Display;
             }
 
+        }
+
+        private void btn_salir_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 
