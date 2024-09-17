@@ -21,26 +21,20 @@ namespace Capa_Controlador_Reporteria
             return tabla;
         }
 
-        public int guardarReporte(String[] datosReporte)
+        public int guardarReporte(TextBox idReporte, string ruta, string nombre_archivo, string aplicacion, string estado)
         {
-            string campos = "";
-            //validamos si existen campos vacios
-            for (int i = 0; i <= datosReporte.Length - 1; i++)
+            //se valida que el textbox no este vacio o con espacios en blanco
+            if (string.IsNullOrEmpty(idReporte.Text) || string.IsNullOrEmpty(ruta) || string.IsNullOrEmpty(nombre_archivo) ||
+                string.IsNullOrEmpty(aplicacion) || string.IsNullOrEmpty(estado))
             {
-                if (datosReporte[i].Length < 1)
-                {
-                    MessageBox.Show("Existen campos que no pueden estar vacios", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return 0;
-                }
+                MessageBox.Show("Existen campos vacios, revise y vuelva a intentarlo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return 0;
             }
-            //luego creamos una variable plana con todos los datos del arreglo para agregarlo al sql de guardar reporte
-            for (int i = 0; i <= datosReporte.Length - 2; i++)
+            else
             {
-                campos = campos + "'" + datosReporte[i] + "',";
+                sentencias.registrarReporte(idReporte.Text, ruta, nombre_archivo, aplicacion, estado);
+                return 1;
             }
-            campos = campos + "'" + datosReporte[datosReporte.Length - 1] + "'";
-            sentencias.registrarReporte(campos);
-            return 1;
         }
 
         public int borrar_reporte(TextBox idReporte)
@@ -49,17 +43,25 @@ namespace Capa_Controlador_Reporteria
             if (string.IsNullOrEmpty(idReporte.Text))
             {
                 MessageBox.Show("El campo no puede estar vacío", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            //luego rectificamos que el usuario quiere barrar el reporte
-            DialogResult result = MessageBox.Show("¿Desea eliminar el reporte #" + idReporte.Text + "?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.No)
-            {
-                MessageBox.Show("No se borró el registro", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return 0;
             }
-            sentencias.eliminarReporte(idReporte.Text);
-            return 1;
+            else
+            {
+                //luego rectificamos que el usuario quiere borrar el reporte
+                DialogResult result = MessageBox.Show("¿Desea eliminar el reporte #" + idReporte.Text + "?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.No)
+                {
+                    MessageBox.Show("No se borró el registro", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return 0;
+                }
+                else
+                {
+                    sentencias.eliminarReporte(idReporte.Text);
+                    return 1;
+                }
+            }
         }
+
         public int ModReporteria(string ruta, string nombre_archivo, string aplicacion, string estado, TextBox idReporte)
         {
             //se valida que el textbox no este vacio o con espacios en blanco
@@ -67,18 +69,24 @@ namespace Capa_Controlador_Reporteria
                 string.IsNullOrEmpty(aplicacion) || string.IsNullOrEmpty(estado))
             {
                 MessageBox.Show("Existen campos vacios, revise y vuelva a intentarlo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            //luego rectificamos que el usuario quiere barrar el reporte
-            DialogResult result = MessageBox.Show("¿Desea Modificar el reporte #" + idReporte.Text + "?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.No)
-            {
-                MessageBox.Show("No se modifico el registro", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return 0;
             }
-            //aqui con los datos que recibimos de la capavista a hora la mandamos a la funicon ModificarReporte en sentencias.cs
-            sentencias.ModificarReporte(ruta, nombre_archivo, aplicacion, estado, idReporte.Text);
-            return 1;
+            else
+            {
+                //luego rectificamos que el usuario quiere barrar el reporte
+                DialogResult result = MessageBox.Show("¿Desea Modificar el reporte #" + idReporte.Text + "?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.No)
+                {
+                    MessageBox.Show("No se modifico el registro", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return 0;
+                }
+                else
+                {
+                    //aqui con los datos que recibimos de la capavista a hora la mandamos a la funicon ModificarReporte en sentencias.cs
+                    sentencias.ModificarReporte(ruta, nombre_archivo, aplicacion, estado, idReporte.Text);
+                    return 1;
+                }
+            }
         }
 
         public DataTable queryReporteria(TextBox query)
