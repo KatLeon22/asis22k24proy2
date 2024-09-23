@@ -27,6 +27,7 @@ namespace CapaDiseno
 
             // Vincula el evento KeyPress
             Txt_clave.KeyPress += new KeyPressEventHandler(Txt_clave_KeyPress);
+            Txt_usuario.KeyPress += new KeyPressEventHandler(Txt_usuario_KeyPress);
         }
 
         string nombreUsuario = "";
@@ -74,7 +75,7 @@ namespace CapaDiseno
                             this.Hide();
 
                             sentencia s = new sentencia();
-                            s.insertarBitacora(Txt_usuario.Text.Trim(), "Se logeo al sistema", "Login");
+                            s.insertarBitacora(Txt_usuario.Text.Trim(), "Se logeo al sistema", "Login", "1000");
 
                             // Pasa el nombre de usuario al constructor de MDI_Seguridad
                             MDI_Seguridad formMDI = new MDI_Seguridad(Txt_usuario.Text);
@@ -213,5 +214,15 @@ namespace CapaDiseno
         {
 
         }
+
+        private void Txt_usuario_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                // Cancela el evento para que el Enter no se procese y no mueva el cursor
+                e.Handled = true;
+            }
+        }
+
     }
 }
