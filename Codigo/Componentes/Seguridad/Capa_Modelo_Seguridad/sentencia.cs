@@ -1056,7 +1056,7 @@ namespace Capa_Modelo_Seguridad
                 switch (iTipoPermiso)
                 {
                     case 1:
-                        OdbcCommand sql = new OdbcCommand("Select guardar_permiso from Tbl_permisos_aplicaciones_usuario WHERE Fk_id_usuario= '" + idUsuario + "' AND Fk_id_aplicacion ='" + sIdAplicacion + "'", cn.conectar());
+                        OdbcCommand sql = new OdbcCommand("Select guardar_permiso from Tbl_permisos_aplicaciones_usuario WHERE Fk_id_usuario= '" + sidUsuario + "' AND Fk_id_aplicacion ='" + sIdAplicacion + "'", cn.conectar());
                         OdbcDataReader almacena = sql.ExecuteReader();
 
                         if (almacena.Read() == true)
@@ -1065,7 +1065,7 @@ namespace Capa_Modelo_Seguridad
                             {
                                 almacena.Close();
                                 sql.Connection.Close();
-                                MessageBox.Show("es igual a true 1");
+
                                 return true;
 
                             }
@@ -1082,7 +1082,7 @@ namespace Capa_Modelo_Seguridad
                             {
                                 almacena.Close();
                                 sql.Connection.Close();
-                                MessageBox.Show("es igual a true 1");
+
                                 return true;
                             }
                         }

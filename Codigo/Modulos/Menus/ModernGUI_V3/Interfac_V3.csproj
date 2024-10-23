@@ -49,6 +49,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Capa_Modelo_Seguridad">
+      <HintPath>..\..\..\Componentes\Seguridad\Capa_Modelo_Seguridad\bin\Debug\Capa_Modelo_Seguridad.dll</HintPath>
+    </Reference>
+    <Reference Include="Capa_Vista_Contabilidad, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Contabilidad\Capa_Vista_Contabilidad\bin\Debug\Capa_Vista_Contabilidad.dll</HintPath>
+    </Reference>
+    <Reference Include="Capa_Vista_Nominas">
+      <HintPath>..\..\Nominas\Capa_Vista_Nominas\bin\Debug\Capa_Vista_Nominas.dll</HintPath>
+    </Reference>
     <Reference Include="Capa_Vista_Seguridad">
       <HintPath>..\..\..\Componentes\Seguridad\Capa_Vista_Seguridad\bin\Debug\Capa_Vista_Seguridad.dll</HintPath>
     </Reference>
@@ -103,6 +113,7 @@
     <Compile Include="splash.Designer.cs">
       <DependentUpon>splash.cs</DependentUpon>
     </Compile>
+    <Compile Include="UsuarioSesion.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

@@ -9,6 +9,8 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Capa_Vista_Nominas;
+using Capa_Vista_Contabilidad;
 
 namespace Interfac_V3
 {
@@ -20,6 +22,7 @@ namespace Interfac_V3
 
             InitializeComponent();
             this.idUsuario = idUsuario;
+            UsuarioSesion.SetIdUsuario(idUsuario);
         }
 
         private void FormModulos_Load(object sender, EventArgs e)
@@ -40,8 +43,11 @@ namespace Interfac_V3
 
         private void btnSeguridad_Click(object sender, EventArgs e)
         {
-           // var usuario = new Capa_Vista_Seguridad.frm_login();
+            // var usuario = new Capa_Vista_Seguridad.frm_login();
             //string idUsuario= usuario.Txt_usuario.ToString();
+
+            //frm_login login = new frm_login();
+            //login.ShowDialog();
 
             MDI_Seguridad formMDI = new MDI_Seguridad(idUsuario);
             formMDI.Show();
@@ -60,6 +66,62 @@ namespace Interfac_V3
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void Btn_Nominas_Click(object sender, EventArgs e)
+        {
+
+            /*
+            Aqui debe de agregarse la referencia a nominas
+            */
+
+            frm_principal_nominas nominas = new frm_principal_nominas(UsuarioSesion.GetIdUsuario());
+            nominas.Show();
+
+
+        }
+
+        private void Btn_Logistica_Click(object sender, EventArgs e)
+        {
+            /*
+             Aqui debe de agregarse la referencia a logistica
+             */
+
+
+        }
+
+        private void Btn_Contabilidad_Click(object sender, EventArgs e)
+        {
+            Contabilidad_MDI conta = new Contabilidad_MDI(UsuarioSesion.GetIdUsuario());
+            conta.Show();
+        }
+
+        private void Btn_Compras_Click(object sender, EventArgs e)
+        {
+            /*
+            Aqui debe de agregarse la referencia a Compras y ventas
+            */
+        }
+
+        private void Btn_Bancos_Click(object sender, EventArgs e)
+        {
+            /*
+            Aqui debe de agregarse la referencia a Bancos
+            */
+        }
+
+        private void Btn_Produccion_Click(object sender, EventArgs e)
+        {
+            /*
+            Aqui debe de agregarse la referencia a produccion
+            */
+        }
+
+        private void Btn_CuentasCorrientes_Click(object sender, EventArgs e)
+        {
+            /*
+            Aqui debe de agregarse la referencia a cuentas corrientes
+            */
         }
     }
 }
